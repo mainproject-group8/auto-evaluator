@@ -1,42 +1,42 @@
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+// import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import { auth, db } from "../config/firebase";
-import { doc, setDoc } from "firebase/firestore";
-import { useAuth } from "../context/AuthContext";
-import { stringify } from "querystring";
-import { Head } from "next/document";
-SignUp.title = "SignUp to Babble";
+// import { auth, db } from "../config/firebase";
+// import { doc, setDoc } from "firebase/firestore";
+// import { useAuth } from "../context/AuthContext";
+// import { stringify } from "querystring";
+// import { Head } from "next/document";
+// SignUp.title = "SignUp to Babble";
 function SignUp() {
   const router = useRouter();
-  const { setUser } = useAuth();
+  // const { setUser } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [err, setErr] = useState(false);
-  const handleSignup = async (e: any) => {
-    e.preventDefault();
-    try {
-      await createUserWithEmailAndPassword(auth, email, password).then(
-        (res) => {
-          updateProfile(res.user, { displayName: name });
-        }
-      );
-      const userData = await auth.currentUser;
-      if (userData) {
-        setUser(userData);
-        await setDoc(doc(db, "users", userData.uid), {
-          name: name,
-          email: userData.email,
-          uid: userData.uid,
-        });
-        await setDoc(doc(db, "userChats", userData.uid), {});
-      }
-      router.push("/");
-    } catch (err) {
-      setErr(true);
-    }
-  };
+  // const handleSignup = async (e: any) => {
+  //   e.preventDefault();
+  //   try {
+  //     await createUserWithEmailAndPassword(auth, email, password).then(
+  //       (res) => {
+  //         updateProfile(res.user, { displayName: name });
+  //       }
+  //     );
+  //     const userData = await auth.currentUser;
+  //     if (userData) {
+  //       setUser(userData);
+  //       await setDoc(doc(db, "users", userData.uid), {
+  //         name: name,
+  //         email: userData.email,
+  //         uid: userData.uid,
+  //       });
+  //       await setDoc(doc(db, "userChats", userData.uid), {});
+  //     }
+  //     router.push("/");
+  //   } catch (err) {
+  //     setErr(true);
+  //   }
+  // };
   return (
     <>
       <div className="bg-gray-200 min-h-screen flex flex-col">
@@ -55,7 +55,7 @@ function SignUp() {
                 you&apos;ve entered!
               </section>
             ) : null}
-            <form onSubmit={handleSignup}>
+            <form onSubmit={() => {}}>
               <input
                 type="text"
                 className="block border border-grey-light w-full p-3 rounded mb-4"

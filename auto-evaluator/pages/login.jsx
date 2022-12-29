@@ -1,26 +1,26 @@
-import { setUserProperties } from "firebase/analytics";
-import { signInWithEmailAndPassword } from "firebase/auth";
+// import { setUserProperties } from "firebase/analytics";
+// import { signInWithEmailAndPassword } from "firebase/auth";
 import Head from "next/head";
 import router, { useRouter } from "next/router";
 import React, { useState } from "react";
-import { auth } from "../config/firebase";
-import { useAuth } from "../context/AuthContext";
+// import { auth } from "../config/firebase";
+// import { useAuth } from "../context/AuthContext";
 function Login() {
   const route = useRouter();
   const { setUser } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
-  const handleSignIn = async (e: any) => {
-    e.preventDefault();
-    try {
-      await signInWithEmailAndPassword(auth, email, password).then((user) => {
-        route.push("/");
-      });
-    } catch (err) {
-      setError(true);
-    }
-  };
+  // const handleSignIn = async (e: any) => {
+  //   e.preventDefault();
+  //   try {
+  //     await signInWithEmailAndPassword(auth, email, password).then((user) => {
+  //       route.push("/");
+  //     });
+  //   } catch (err) {
+  //     setError(true);
+  //   }
+  // };
 
   return (
     <>
@@ -36,11 +36,11 @@ function Login() {
             <h1 className="mb-8 text-3xl text-center">Log In</h1>
             {error ? (
               <section className="bg-red-500 text-white w-full my-2 p-3 text-center">
-                Something&apos;s not right! Please check if you entered a valid email
-                and password.
+                Something&apos;s not right! Please check if you entered a valid
+                email and password.
               </section>
             ) : null}
-            <form onSubmit={handleSignIn}>
+            <form onSubmit={() => {}}>
               <input
                 type="text"
                 className="block border border-grey-light w-full p-3 rounded mb-4"
