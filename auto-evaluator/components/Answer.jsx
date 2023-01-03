@@ -26,7 +26,7 @@ class AnswerList extends React.Component {
 
   render() {
     return (
-      <div style={{width:'50%', margin: '1rem', padding: '1rem', border: '2px dotted white', borderRadius: '1rem'}}>
+      <div id='answer-border'>
         <form onSubmit={this.handleSubmit}>
             <input
               type="text"
