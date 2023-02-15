@@ -3,6 +3,18 @@ import { useState, useRef } from "react";
 import AnswerList from "../components/Answer";
 
 export default function Home() {
+  // -------------------------------------
+  const [selectedFile, setSelectedFile] = useState();
+  const [isFilePicked, setIsFilePicked] = useState(false);
+  const [isSelected, setIsSelected] = useState(false);
+
+  const changeHandler = (event) => {
+    setSelectedFile(event.target.files[0]);
+    setIsSelected(true);
+  };
+  // ---------------------------------------
+
+
   // drag state
   const [dragActive, setDragActive] = useState(false);
   // ref
@@ -41,6 +53,11 @@ export default function Home() {
   const onButtonClick = () => {
     inputRef.current.click();
   };
+
+  const handleClick = () => {
+    console.log("Uploaded")
+  }
+
   return (
     <>
       <Head>
@@ -70,22 +87,16 @@ export default function Home() {
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-4">
           Download Answer Template
         </button>
-        
+
         <h3 >Answers</h3>
-    
+
         <AnswerList />
 
         <div className="mt-8">
           <h2>Upload</h2>
           <form id="form-file-upload">
-            <input type="file" id="input-file-upload" multiple={true} />
-            <label id="label-file-upload" htmlFor="input-file-upload">
-              <div>
-                <p>Drag and drop your file here or</p>
-                <button className="upload-button">Upload a file</button>
-              </div>
-            </label>
-            {dragActive && (
+
+            {/* {dragActive && (
               <div
                 id="drag-file-element"
                 onDragEnter={handleDrag}
@@ -93,6 +104,20 @@ export default function Home() {
                 onDragOver={handleDrag}
                 onDrop={handleDrop}
               ></div>
+            )} */}
+            <input type="file" name="file" onChange={changeHandler} />
+            {isSelected ? (
+              <div>
+                <p>Filename: {selectedFile.name}</p>
+                <p>Filetype: {selectedFile.type}</p>
+                <p>Size in bytes: {selectedFile.size}</p>
+                <p>
+                  lastModifiedDate:{' '}
+                  {selectedFile.lastModifiedDate.toLocaleDateString()}
+                </p>
+              </div>
+            ) : (
+              <p>Select a file to show details</p>
             )}
           </form>
         </div>
