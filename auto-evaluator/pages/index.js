@@ -12,6 +12,22 @@ export default function Home() {
     setSelectedFile(event.target.files[0]);
     setIsSelected(true);
   };
+
+  // Function will execute on click of button
+  const onDownloadTemplateClick = () => {
+    // using Java Script method to get PDF file
+    fetch('SamplePDF.pdf').then(response => {
+        response.blob().then(blob => {
+            // Creating new object of PDF file
+            const fileURL = window.URL.createObjectURL(blob);
+            // Setting various property values
+            let alink = document.createElement('a');
+            alink.href = fileURL;
+            alink.download = 'SamplePDF.pdf';
+            alink.click();
+        })
+    })
+  }
   // ---------------------------------------
 
 
@@ -84,8 +100,8 @@ export default function Home() {
           </li>
         </ol>
 
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-4">
-          Download Answer Template
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-4" onClick={onDownloadTemplateClick}>
+          Download Answer Template 
         </button>
 
         <h3 >Answers</h3>
@@ -128,7 +144,7 @@ export default function Home() {
       </div>
       <div className="w-full text-center">
         <hr className="h-6" />
-        <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-8 rounded my-4">
+        <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-8 rounded my-4" onClick={onDownloadTemplateClick}>
           Download Result
         </button>
       </div>
